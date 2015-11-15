@@ -1,0 +1,20 @@
+[Unit]
+Description=Fluxbb
+After=docker.service mysql.service
+Requires=mysql.service
+
+[Service]
+Restart=always
+KillMode=control-group
+ExecStartPre=-/usr/bin/docker run --name=fluxbb-data -v /data \
+    oseam/fluxbb-docker echo "data-only container for fluxbb"
+ExecStart=/usr/bin/docker run --name=fluxbb-web --detach=false --cpu-shares=512 \
+    --memory=128M --publish=127.0.0.1:8080:80 --rm=true \
+    --env=VIRTUAL_HOST=forum.openseamap.org \
+    --volumes-from=fluxbb-data --hostname=fluxbb-web \
+    --cap-drop=NET_RAW --link=mysql:mysql \
+    openseamap/fluxbb-docker
+ExecStop=/usr/bin/docker pull openseamap/fluxbb-docker:latest
+
+[Install]
+WantedBy=multi-user.target
