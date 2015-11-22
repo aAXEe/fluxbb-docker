@@ -1,7 +1,7 @@
 [Unit]
 Description=Fluxbb
-After=docker.service mysql.service
-Requires=mysql.service
+After=docker.service mysql.service smtp.service
+Requires=mysql.service smtp.service
 
 [Service]
 Restart=always

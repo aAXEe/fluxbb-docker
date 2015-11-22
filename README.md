@@ -12,6 +12,7 @@ This container requires a running, linked mysql instance, e.g.
 is intended to be run behind a reverse-proxy and thus comes with an SSL
 webserver configuration.
 It is prepared to use [raumzeitlabor/nginx-proxy](https://github.com/raumzeitlabor/nginx-proxy).
+To send mails a linked smtp server is necessary (e. g. [aAXEe/smtp-docker](https://github.com/aAXEe/smtp-docker).
 
 ### Setup
 
