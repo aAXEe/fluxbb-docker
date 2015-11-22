@@ -46,7 +46,7 @@ and to your local files (mounted at `/extern`).
 
 Copy the `config.php`:
 ```
-cp /extern/some/path/config.php /data/conf/
+cp /extern/some/path/config.php /data/fluxbb/
 ```
 
 
