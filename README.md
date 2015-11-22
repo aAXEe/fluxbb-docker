@@ -3,7 +3,7 @@ It is based on [phusion/baseimage-docker](https://github.com/phusion/baseimage-d
 The Dockerfile is based on [raumzeitlabor/mediawiki-docker](https://github.com/raumzeitlabor/mediawiki-docker).
 
 The fluxbb version being used is 1.5.9. The image comes with a
-default installation housed in `/data`.
+default installation housed in `/data/fluxbb`.
 
 ### Requirements
 

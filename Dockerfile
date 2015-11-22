@@ -41,41 +41,21 @@ RUN chmod +x /etc/service/php5-fpm/run
 
 ADD nginx-site.conf /etc/nginx/sites-available/default
 
-RUN \
-    cd /tmp && aria2c -s 4 http://fluxbb.org/download/releases/1.5.9/fluxbb-1.5.9.tar.gz ;\
-    mkdir /usr/share/fluxbb ;\
-    tar xvzf /tmp/fluxbb-1.5.9.tar.gz --strip-components=1 -C /usr/share/fluxbb ;\
-    rm -rf /tmp/fluxbb-1.5.9.tar.gz
 
 # create data dirs
 RUN \
     mkdir /data \
-    mkdir /data/conf /data/backup
-
-# move and link files to expose them in the data container
-RUN \
-    mv /usr/share/fluxbb/img/avatars /data/avatars ;\
-    ln -s /data/avatars /usr/share/fluxbb/img/avatars
+    mkdir /data/backup
 
 RUN \
-    mv /usr/share/fluxbb/cache /data/cache ;\
-    ln -s /data/cache /usr/share/fluxbb/cache
-
-RUN \
-    mv /usr/share/fluxbb/lang /data/lang ;\
-    ln -s /data/lang /usr/share/fluxbb/lang
-
-RUN \
-    mv /usr/share/fluxbb/plugins /data/plugins ;\
-    ln -s /data/plugins /usr/share/fluxbb/plugins
-
-RUN \
-    touch /data/conf/config.php && ln -s /data/conf/config.php /usr/share/fluxbb && rm /data/conf/config.php
+    cd /tmp && aria2c -s 4 http://fluxbb.org/download/releases/1.5.9/fluxbb-1.5.9.tar.gz ;\
+    mkdir /data/fluxbb ;\
+    tar xvzf /tmp/fluxbb-1.5.9.tar.gz --strip-components=1 -C /data/fluxbb ;\
+    rm -rf /tmp/fluxbb-1.5.9.tar.gz
 
 # set necessary rights
 RUN \
-    chown -R www-data /data/cache ;\
-    chown -R www-data /data/avatars
+    chown -R www-data /data/fluxbb
 
 
 ADD docker-entrypoint.sh /etc/rc.local

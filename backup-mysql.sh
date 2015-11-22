@@ -6,10 +6,10 @@ DAYS_TO_KEEP=$(( 14 - 1))
 TARGET_DIR=/data/backup
 
 # *sigh*
-MYSQL_DB=$(php5 -r "$(grep db_name  /data/conf/config.php; echo 'print $db_name;';)")
-MYSQL_HOST=$(php5 -r "$(grep db_host /data/conf/config.php; echo 'print $db_host;';)")
-MYSQL_USER=$(php5 -r "$(grep db_username /data/conf/config.php; echo 'print $db_username;';)")
-MYSQL_PASSWD=$(php5 -r "$(grep db_password /data/conf/config.php; echo 'print $db_password;';)")
+MYSQL_DB=$(php5 -r "$(grep db_name  /data/fluxbb/config.php; echo 'print $db_name;';)")
+MYSQL_HOST=$(php5 -r "$(grep db_host /data/fluxbb/config.php; echo 'print $db_host;';)")
+MYSQL_USER=$(php5 -r "$(grep db_username /data/fluxbb/config.php; echo 'print $db_username;';)")
+MYSQL_PASSWD=$(php5 -r "$(grep db_password /data/fluxbb/config.php; echo 'print $db_password;';)")
 
 echo "Backing up fluxbb database…"
 
