@@ -12,7 +12,7 @@ ExecStart=/usr/bin/docker run --name=fluxbb-web --detach=false --cpu-shares=512 
     --volumes-from=fluxbb-data --hostname=fluxbb-web \
     --cap-drop=NET_RAW --link=mysql:db --link=smtp:smtp \
     openseamap/fluxbb-docker
-ExecStop=/usr/bin/docker pull openseamap/fluxbb-docker:latest
+ExecStop=/usr/bin/docker pull openseamap/fluxbb-docker:master
 
 [Install]
 WantedBy=multi-user.target
