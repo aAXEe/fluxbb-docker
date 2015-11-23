@@ -8,9 +8,9 @@ Restart=always
 KillMode=control-group
 ExecStart=/usr/bin/docker run --name=fluxbb-web --detach=false --cpu-shares=512 \
     --memory=128M --publish=127.0.0.1:8080:80 --rm=true \
-    --env=VIRTUAL_HOST=forum.openseamap.org \
+    --env=VIRTUAL_HOST=forum.* \
     --volumes-from=fluxbb-data --hostname=fluxbb-web \
-    --cap-drop=NET_RAW --link=mysql:mysql \
+    --cap-drop=NET_RAW --link=mysql:db --link=smtp:smtp \
     openseamap/fluxbb-docker
 ExecStop=/usr/bin/docker pull openseamap/fluxbb-docker:latest
 
