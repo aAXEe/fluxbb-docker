@@ -1,18 +1,20 @@
 [Unit]
 Description=Fluxbb
-After=docker.service mysql.service smtp.service
-Requires=mysql.service smtp.service
+After=docker.service mysql.service
+Requires=mysql.service
+Wants=reverse-proxy.service
 
 [Service]
 Restart=always
 KillMode=control-group
 ExecStart=/usr/bin/docker run --name=fluxbb-web --detach=false --cpu-shares=512 \
-    --memory=128M --publish=127.0.0.1:8080:80 --rm=true \
+    --memory=128M --publish=127.0.0.1::80 --rm=true \
     --env=VIRTUAL_HOST=forum.* \
     --volumes-from=fluxbb-data --hostname=fluxbb-web \
-    --cap-drop=NET_RAW --link=mysql:db --link=smtp:smtp \
+    --cap-drop=NET_RAW --link=mysql:db \
+     --add-host=host:`ip -4 addr show scope global dev docker0 | grep inet | awk '{print \$2}' | cut -d / -f 1` \
     openseamap/fluxbb-docker:master
-ExecStop=/usr/bin/docker pull openseamap/fluxbb-docker:master
+ExecReload=/usr/bin/docker pull openseamap/fluxbb-docker:master
 
 [Install]
 WantedBy=multi-user.target
