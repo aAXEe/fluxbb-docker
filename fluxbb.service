@@ -7,6 +7,7 @@ Wants=reverse-proxy.service
 [Service]
 Restart=always
 KillMode=control-group
+ExecStartPre=-/usr/bin/docker rm fluxbb-web
 ExecStart=/usr/bin/docker run --name=fluxbb-web --detach=false --cpu-shares=512 \
     --memory=128M --publish=127.0.0.1::80 --rm=true \
     --env=VIRTUAL_HOST=forum.* \
