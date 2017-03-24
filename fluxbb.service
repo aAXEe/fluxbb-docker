@@ -12,6 +12,7 @@ ExecStart=/usr/bin/docker run --name=fluxbb-web --detach=false --cpu-shares=512 
     --memory=128M --publish=127.0.0.1::80 --rm=true \
     --env=VIRTUAL_HOST=forum.*,forum.openseamap.org \
     --env=LETSENCRYPT_HOST=forum.openseamap.org --env=LETSENCRYPT_EMAIL=project@openseamap.org \
+    --env=HTTPS_METHOD=redirect \
     --volumes-from=fluxbb-data --hostname=fluxbb-web \
     --cap-drop=NET_RAW --link=mysql:db \
     openseamap/fluxbb-docker:master
